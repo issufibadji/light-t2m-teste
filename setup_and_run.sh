@@ -21,14 +21,13 @@ fi
 "${PYTHON_BIN}" -m pip install --upgrade pip
 
 # Ensure PyTorch is installed before building torch-dependent packages.
-"${PYTHON_BIN}" - <<'PY'
+if ! "${PYTHON_BIN}" - <<'PY'
 import importlib.util
-import sys
 
 if importlib.util.find_spec("torch") is None:
-    sys.exit(1)
+    raise SystemExit(1)
 PY
-if [[ $? -ne 0 ]]; then
+then
   # Install PyTorch 1.12.x with CUDA wheels (adjust if your Paperspace image differs).
   "${PYTHON_BIN}" -m pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --index-url https://download.pytorch.org/whl/cu113
 fi
@@ -53,4 +52,4 @@ if torch.cuda.is_available():
 PY
 
 # Run a minimal text-to-motion inference using the helper Python script.
-python run_inference.py
+"${PYTHON_BIN}" run_inference.py
