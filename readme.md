@@ -191,6 +191,25 @@ python src/sample_motion.py device=\"0\"  \
 
 </details>
 
+## Paperspace Quickstart (PyTorch 1.12)
+
+Use these steps in a Paperspace Gradient terminal to install dependencies, verify CUDA, and run a minimal inference. Replace the repository path with the directory where you cloned Light-T2M.
+
+```bash
+cd /notebooks/light-t2m
+
+# Run the setup script to install requirements, validate CUDA, and launch inference.
+./setup_and_run.sh
+```
+
+If your Paperspace image uses Python 3.11 and PyTorch 1.12 is missing, the script will attempt to install PyTorch 1.12 CUDA wheels. If that fails, switch to a Python 3.10-based Paperspace image or set `PYTHON_BIN=python3.10` before running the script.
+
+If you want to run the inference script directly (after installing dependencies), use:
+
+```bash
+python run_inference.py
+```
+
 
 ## Visualization
 
@@ -243,4 +262,3 @@ Thanks to all open-source projects and libraries that supported our research:
 This project is licensed under the [MIT License](https://github.com/EricGuo5513/momask-codes/tree/main?tab=MIT-1-ov-file#readme).
 
 Note that our code depends on other libraries, including SMPL, SMPL-X, PyTorch3D, and uses datasets which each have their own respective licenses that must also be followed.
-
